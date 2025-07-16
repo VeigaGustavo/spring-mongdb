@@ -1,6 +1,7 @@
 package com.veiga.workshopmongo.services;
 
 import com.veiga.workshopmongo.domain.User;
+import com.veiga.workshopmongo.dto.UserDTO;
 import com.veiga.workshopmongo.repository.UserRepository;
 import com.veiga.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,13 @@ public class UserService {
                 new ObjectNotFoundException(
                         "Object not found! Id: " + id + ", Type: " + User.class.getName())
         );
+    }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO obj) {
+        return new User(obj.getId(), obj.getName(), obj.getEmail());
     }
 }
