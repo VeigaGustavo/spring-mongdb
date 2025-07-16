@@ -1,6 +1,7 @@
 package com.veiga.workshopmongo.resource;
 
 import com.veiga.workshopmongo.domain.User;
+import com.veiga.workshopmongo.dto.UserDTO;
 import com.veiga.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,11 @@ public class UserResource {
     private UserService  service;
 
     @RequestMapping(method= RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
 
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDTO> listDTO = list.stream().map(obj -> new UserDTO(obj)).toList();
+        return ResponseEntity.ok().body(listDTO);
 
     }
 }
