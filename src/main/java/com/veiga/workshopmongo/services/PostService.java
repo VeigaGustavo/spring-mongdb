@@ -1,10 +1,7 @@
 package com.veiga.workshopmongo.services;
 
 import com.veiga.workshopmongo.domain.Post;
-import com.veiga.workshopmongo.domain.User;
-import com.veiga.workshopmongo.dto.UserDTO;
 import com.veiga.workshopmongo.repository.PostRepository;
-import com.veiga.workshopmongo.repository.UserRepository;
 import com.veiga.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +21,7 @@ public class PostService {
         );
     }
 
+    public List<Post> findByTitle(String text) {
+        return repo.findByTitleContainingIgnoreCase(text);
+    }
 }
