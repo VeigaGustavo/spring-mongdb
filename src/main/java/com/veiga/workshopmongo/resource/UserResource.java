@@ -1,5 +1,6 @@
 package com.veiga.workshopmongo.resource;
 
+import com.veiga.workshopmongo.domain.Post;
 import com.veiga.workshopmongo.domain.User;
 import com.veiga.workshopmongo.dto.UserDTO;
 import com.veiga.workshopmongo.services.UserService;
@@ -62,4 +63,12 @@ public class UserResource {
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value="/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
+
 }
